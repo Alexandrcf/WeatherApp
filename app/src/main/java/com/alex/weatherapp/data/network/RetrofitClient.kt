@@ -6,10 +6,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitClient {
 
-    val apiService: ApiService by lazy {
+    val apiService: WeatherApiService by lazy {
         Retrofit.Builder()
             .baseUrl("https://api.open-meteo.com/")
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
-            .build().create(ApiService::class.java)
+            .build().create(WeatherApiService::class.java)
     }
 }

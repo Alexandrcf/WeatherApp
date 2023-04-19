@@ -1,17 +1,17 @@
 package com.alex.weatherapp.data.repository
 
-import com.alex.weatherapp.data.network.ApiService
+import com.alex.weatherapp.data.network.WeatherApiService
 import com.alex.weatherapp.data.network.RetrofitClient
 import com.alex.weatherapp.domain.models.JsonDataClass
-import com.alex.weatherapp.domain.repository.RepositoryWeather
+import com.alex.weatherapp.domain.repository.WeatherRepository
 
-class RepositoryWeatherImpl() : RepositoryWeather {
+class WeatherRepositoryImpl() : WeatherRepository {
 
-    private var client: ApiService = RetrofitClient().apiService
+    private var client: WeatherApiService = RetrofitClient().apiService
 
     override suspend fun getTemperature(): JsonDataClass? {
         try {
-            return client.getData().body()
+            return client.getForecast().body()
         } catch (e: Exception) {
             e.toString()
             throw  e
