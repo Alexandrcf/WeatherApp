@@ -1,5 +1,5 @@
 package com.alex.weatherapp.domain.models
 
-data class JsonDataClass(
+data class ForecastDto(
     val temperature: Int
 )
