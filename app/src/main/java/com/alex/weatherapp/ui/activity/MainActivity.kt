@@ -1,6 +1,7 @@
 package com.alex.weatherapp.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,10 +12,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.alex.weatherapp.ui.theme.WeatherAppTheme
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
+
+    private val viewModel: CurrentWeatherViewModel by viewModel<CurrentWeatherViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        viewModel.getTemperatureFromApi()
+        viewModel.temperatureApiLiveData.observe(this) { temp ->
+            Log.d("MyLog", "temperatureApiLiveData + $temp")
+        }
+
         setContent {
             WeatherAppTheme {
                 // A surface container using the 'background' color from the theme
@@ -22,7 +33,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    //Greeting(temp.toString())
                 }
             }
         }
@@ -31,13 +42,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+    Text(text = "Temp $name!")
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     WeatherAppTheme {
-        Greeting("Android")
+        Greeting("0")
     }
 }

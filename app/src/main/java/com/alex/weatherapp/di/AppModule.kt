@@ -11,5 +11,4 @@ val appModule = module {
             getTemperatureUseCase = get()
         )
     }
-
 }

@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface WeatherApiService {
 
-    @GET("v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m")
+    @GET("v1/forecast?latitude=60.04&longitude=30.21&hourly=temperature_2m,rain&current_weather=true&timezone=Europe%2FMoscow")
     suspend fun getForecast(): Response<ForecastDto>
 }

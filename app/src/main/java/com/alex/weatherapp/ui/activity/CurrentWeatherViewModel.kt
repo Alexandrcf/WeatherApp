@@ -1,5 +1,6 @@
 package com.alex.weatherapp.ui.activity
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,13 +12,14 @@ class CurrentWeatherViewModel(
     private val getTemperatureUseCase: GetTemperatureUseCase
 ) : ViewModel() {
 
-    val temperatureApiLiveData: MutableLiveData<List<ForecastDto>> = MutableLiveData<List<ForecastDto>>()
+    val temperatureApiLiveData: MutableLiveData<Int> = MutableLiveData<Int>()
 
     fun getTemperatureFromApi() {
+        Log.d("MyLog", "CurrentWeatherViewModel")
         viewModelScope.launch {
             try {
-                //TODO
-                //temperatureApiLiveData.value = getTemperatureUseCase.execute()
+                Log.d("MyLog", "viewModelScope")
+                temperatureApiLiveData.value = getTemperatureUseCase.invoke()?.temperature
             }
             catch (e: Exception)
             {
